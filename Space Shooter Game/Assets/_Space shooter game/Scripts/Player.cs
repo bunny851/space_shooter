@@ -6,20 +6,17 @@ public class Player : MonoBehaviour
 {
     public float speed = 5f;
     public Projectile laserPrefab;
+    public GameObject _leftBlaster, _rightBlaster;
+
+    [HideInInspector] public Transform _playerShipTransform;
+
+    void Start()
+    {
+        _playerShipTransform = gameObject.transform;
+    }
 
     private void Update()
     {
-        Vector3 position = transform.position;
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            position.x -= speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            position.x += speed * Time.deltaTime;
-        }
-        transform.position = position;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Shoot();
@@ -27,7 +24,8 @@ public class Player : MonoBehaviour
     }
     private void Shoot()
     {
-        Projectile laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        Instantiate(laserPrefab, _leftBlaster.transform.position, Quaternion.identity);
+        Instantiate(laserPrefab, _rightBlaster.transform.position, Quaternion.identity);
     }
 }
 

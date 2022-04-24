@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Vector3 direction;
+    private Vector3 direction = Vector3.up;
     public float speed;
 
-    private void update()
+    private void Update()
     {
-        this.transform.position += this.direction * this.speed * Time.deltaTime;
+        transform.position += direction * speed * Time.deltaTime;
     }
 }
     
